@@ -1,31 +1,32 @@
-from Person import Person
+from pessoas import Person
+
+import os
 
 lista = []
+
+def clear():
+    os.system('cls')
 
 def adicionarPessoas():
     print("\nAdicionando pessoas")
 
     while(True):
         nome = input('Qual o nome da pessoa? (fim para terminar) ')
-        if(nome == 'fim') :
+        if(nome == 'fim'):
+            clear()
             break
         numero = input('Qual o número de telefone da pessoa? ')
         cep = input("E qual o cep? ")
         pessoa = Person(nome, numero, cep)
         lista.append(pessoa)
-
-    main()
+        clear()
 
 def listarTodasAsPessoas():
     print("\nListando todas as pessoas:")
 
     for pessoa in lista:
-        print('Nome: '+pessoa.nome)
-        print('Número de telefone: ' +pessoa.numero)
-        print("Cep: "+pessoa.cep)
+        pessoa.listarProps()
         print()
-
-    main()
 
 def buscarPessoa():
     nome = input("\nQual o nome da pessoa que você quer procurar? ").lower()
@@ -41,9 +42,9 @@ def buscarPessoa():
         print("Não foi encontrada nenhuma pessoa com esse nome")
     else:
         if(len(pessoas) == 1):
-            print("Foi encontrada " + str(len(pessoas)) + " pessoa: ")
+            print("\nFoi encontrada " + str(len(pessoas)) + " pessoa: ")
         else:
-            print("Foram encontradas "+str(len(pessoas))+" pessoas: ")
+            print("\nForam encontradas "+str(len(pessoas))+" pessoas: ")
 
         for pessoa in pessoas:
             print('Nome: ' + pessoa.nome)
@@ -51,8 +52,7 @@ def buscarPessoa():
             print("Cep: " + pessoa.cep)
             print()
 
-    main()
-def main():
+while True:
     print("\nBem vindo!")
     print('1 - Adicionar pessoas à lista')
     print('2 - Listas todas as pessoas')
@@ -62,16 +62,18 @@ def main():
     num = int(input('Digite um número: '))
 
     if(num < 1 or num > 3):
+        clear()
         print("Finalizado")
-        return
+        break
 
     if(num == 1):
+        clear()
         adicionarPessoas()
 
     if(num == 2):
+        clear()
         listarTodasAsPessoas()
 
     if(num == 3):
+        clear()
         buscarPessoa()
-
-main()
